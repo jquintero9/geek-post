@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Artículos{% endblock %}
+
+{% block content %}
+{% include 'articulos/mensajes.html' %}
+    {% if lista_articulos %}
+    <section id="seccion-posts">
+    {% for articulo in lista_articulos %}
+    <article class="post">
+        <h2><a href="{% url 'articulo:ver_articulo' articulo.id %}">{{articulo.titulo}}</a><br />
+        <small>{{articulo.fecha_publicacion}}</small></h2>
+        {% if articulo.imagen %}
+        <img class="imagen-post" src="{{ articulo.imagen.url }}" alt="">
+        {% endif %}
+        <p>{{articulo.contenido}}</p>
+    </article>
+    {% endfor %}
+    </section>
+    {% else %}
+    <h2 class="contenedor-mensaje">La lista de artículos está vacia.</h2>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Artículo{% endblock %}
+
+{% block content %}
+<h1>¿Está seguro que desea eliminar el artículo {{post}}?</h1>
+<form action="" method="post"> {% csrf_token %}
+    <input type="submit" value="Eliminar" />
+    <a href="{% url 'articulo:lista_articulos' %}">Cancelar</a>
+</form>
+{% endblock %}

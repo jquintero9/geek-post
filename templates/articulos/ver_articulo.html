@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}{{articulo.titulo}}{% endblock %}
+
+{% block content %}
+<h1>{{articulo.titulo}}</h1>
+{% if articulo.imagen %}
+<img class="imagen-post" src="{{ articulo.imagen.url }}" alt="">
+{% endif %}
+<p>{{articulo.contenido}}</p>
+<div>Fecha de Publicación: {{articulo.fecha_publicacion}}</div>
+<div>Última Actualización: {{articulo.ultima_actualizacion}}</div>
+{% endblock %}
