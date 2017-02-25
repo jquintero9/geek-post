@@ -53,7 +53,6 @@ INSTALLED_APPS = [
 
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
-    'allauth.socialaccount.providers.google',
 ]
 
 '#Identificador del sitio web de está aplicación'
@@ -191,15 +190,6 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE': ['email'],
         'METHOD': 'oauth2'  # instead of 'oauth2'
     },
-    'google': {
-            'SCOPE': [
-                'profile',
-                'email',
-            ],
-            'AUTH_PARAMS': {
-                'access_type': 'online',
-            }
-    }
 }
 
 """
@@ -209,6 +199,8 @@ usuarios.
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 

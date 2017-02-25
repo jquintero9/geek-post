@@ -1,8 +1,9 @@
 #!usr/local/bin
 # coding: latin-1
 
+from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin, PermissionDenied
@@ -10,28 +11,26 @@ from .models import Articulo, Categoria
 from .forms import ArticuloForm
 
 
-class ListaArticulos(ListView):
+class ListaArticulos(View):
     """
     Esta clase mustra la lista de posts.
     """
-
-    model = Articulo
     template_name = 'articulos/lista_articulos.html'
-    context_object_name = 'lista_articulos'
+    context = {}
 
-    def get_context_data(self, **kwargs):
-        """
-        Obtiene el contenido del contexto que será enviado a la vista.
-        Se sobrecarga este método para agregar la lista de categorías
-        al contexto de la vista.
-        :param kwargs: kwargs del request.
-        :return: El contexto que será enviado a la vista o template.
-        """
-        context = super(ListaArticulos, self).get_context_data(**kwargs)
-        '#Se obtiene una lista con todas las categorías disponibles'
-        context['categorias'] = Categoria.objects.all()
+    def get(self, request):
+        try:
+            if request.GET['categoria']:
+                categoria = request.GET['categoria']
+                objeto_categoria = Categoria.objects.get(nombre=categoria)
+                articulos = Articulo.objects.filter(categoria=objeto_categoria.id)
+        except:
+            articulos = Articulo.objects.all()
 
-        return context
+        self.context['lista_articulos'] = articulos
+        self.context['categorias'] = Categoria.objects.all()
+
+        return render(request, self.template_name, self.context)
 
 
 class VerArticulo(LoginRequiredMixin, DetailView):
