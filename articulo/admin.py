@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Articulo
+from .models import Articulo, Categoria
 
 
 class ArticuloAdmin(admin.ModelAdmin):
 
-    list_display = ['titulo', 'ultima_actualizacion', 'fecha_publicacion']
+    list_display = ['titulo', 'ultima_actualizacion', 'fecha_publicacion', 'categoria']
     list_display_links = ['ultima_actualizacion']
     list_editable = ['titulo']
     list_filter = ['fecha_publicacion']
@@ -14,5 +14,13 @@ class ArticuloAdmin(admin.ModelAdmin):
         model = Articulo
 
 
-admin.site.register(Articulo, ArticuloAdmin)
+class CategoriaAdmin(admin.ModelAdmin):
 
+    list_display = ['nombre', 'descripcion']
+
+    class Meta:
+        model = Categoria
+
+
+admin.site.register(Articulo, ArticuloAdmin)
+admin.site.register(Categoria, CategoriaAdmin)

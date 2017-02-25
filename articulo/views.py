@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin, PermissionDenied
-from .models import Articulo
+from .models import Articulo, Categoria
 from .forms import ArticuloForm
 
 
@@ -22,12 +22,14 @@ class ListaArticulos(ListView):
     def get_context_data(self, **kwargs):
         """
         Obtiene el contenido del contexto que será enviado a la vista.
-        Se sobrecarga este método para agregar contenido al contexto de la vista.
+        Se sobrecarga este método para agregar la lista de categorías
+        al contexto de la vista.
         :param kwargs: kwargs del request.
         :return: El contexto que será enviado a la vista o template.
         """
         context = super(ListaArticulos, self).get_context_data(**kwargs)
-        context['admin'] = 'jhjaquintero@gmail.com'
+        '#Se obtiene una lista con todas las categorías disponibles'
+        context['categorias'] = Categoria.objects.all()
 
         return context
 
@@ -37,6 +39,11 @@ class VerArticulo(LoginRequiredMixin, DetailView):
     template_name = 'articulos/ver_articulo.html'
     context_object_name = 'articulo'
     login_url = reverse_lazy('account_login')
+
+    def get_context_data(self, **kwargs):
+        context = super(VerArticulo, self).get_context_data(**kwargs)
+        context['categorias'] = Categoria.objects.all()
+        return context
 
 
 class CrearArticulo(SuccessMessageMixin, CreateView):

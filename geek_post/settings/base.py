@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.google',
 ]
 
 '#Identificador del sitio web de está aplicación'
@@ -190,6 +191,15 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE': ['email'],
         'METHOD': 'oauth2'  # instead of 'oauth2'
     },
+    'google': {
+            'SCOPE': [
+                'profile',
+                'email',
+            ],
+            'AUTH_PARAMS': {
+                'access_type': 'online',
+            }
+    }
 }
 
 """

@@ -1,0 +1,14 @@
+<aside id="categorias">
+<h3 class="titulo-categorias icon-tags">Categorías</h3>
+{% if categorias %}
+<section id="contenedor-categorias">
+    {% for categoria in categorias %}
+    <div class="categoria">
+        <a href="#">{{categoria}}</a>
+    </div>
+    {% endfor %}
+</section>
+{% else %}
+<h3>La lista de Categorías está vacia.</h3>
+{% endif %}
+</aside>

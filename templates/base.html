@@ -15,7 +15,11 @@
     {% block header %}
     <header id="header">
         <div id="contenedor-header">
-            <h1 id="titulo-header"><a href="{% url 'articulo:lista_articulos' %}">Geek Post</a></h1>
+            <h1 id="titulo-header">
+                <a href="{% url 'articulo:lista_articulos' %}">
+                    <img src="{% static 'img/logo.png' %}" alt="Geek Post" />
+                </a>
+            </h1>
             <nav id="menu-header">
                 <ul>
                     {% if user.is_authenticated %}

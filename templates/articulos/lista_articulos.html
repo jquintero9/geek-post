@@ -14,13 +14,9 @@
         {% endif %}
         <p class="introduccion-articulo">{{articulo.introduccion}}</p>
         <a href="{% url 'articulo:ver_articulo' articulo.id %}" class="leer-mas icon-book">Leer más>></a>
-        <!--<div class="contenedor-leer-mas">
-
-        </div>-->
     </article>
     {% endfor %}
     </section>
-    {% else %}
-    <h2 class="contenedor-mensaje">La lista de artículos está vacia.</h2>
     {% endif %}
+    {% include 'articulos/categorias.html' %}
 {% endblock %}
