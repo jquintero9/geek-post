@@ -3,27 +3,33 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block head_title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <!--<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link href="https://file.myfontastic.com/MaQv9ELxzupxov3cqYdLwe/icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
 </head>
 <body>
 <div id="contenedor-pagina">
+    {% block header %}
     <header id="header">
         <div id="contenedor-header">
-            <h1 id="titulo-header"><a href="#">Geek Post</a></h1>
+            <h1 id="titulo-header"><a href="{% url 'articulo:lista_articulos' %}">Geek Post</a></h1>
             <nav id="menu-header">
                 <ul>
                     {% if user.is_authenticated %}
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Signup</a></li>
+                    <li><span class="icon-user">{{user}}</span></li>
+                    <li><a href="{% url 'account_logout' %}" class="icon-sign-out">Salir</a></li>
                     {% else %}
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="{% url 'account_login' %}" class="icon-sign-in">Entrar</a></li>
+                    <li><a href="{% url 'account_signup' %}" class="icon-user">Registrarse</a></li>
                     {% endif %}
                 </ul>
             </nav>
         </div>
     </header>
+    {% endblock %}
     <div id="contenido">
         {% block content %}
         {% endblock %}

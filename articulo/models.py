@@ -19,6 +19,9 @@ class Articulo(models.Model):
     class Meta:
         db_table = 'articulos'
         ordering = ['-fecha_publicacion']
+        permissions = [
+            ('es_autor', 'es autor'),
+        ]
 
     def __unicode__(self):
         return self.titulo

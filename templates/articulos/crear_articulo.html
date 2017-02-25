@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Crear Artículo{% endblock %}
+{% block head_title %}Crear Artículo{% endblock %}
 
 {% block content %}
 {% include 'articulos/mensajes.html' %}
@@ -14,3 +14,38 @@
     </form>
 </div>
 {% endblock %}
+
+{% if form.errors %}
+    <div class="contenedor-mensaje">
+        {% for error in form.errors_list %}
+        {{error}}
+        {% endfor %}
+    </div>
+
+    {% endif %}
+    <!--Mensajes de error para el campo de login-->
+    {% if form.login.errors %}
+    <div class="contenedor-mensaje">
+        {% for error in form.login.errors %}
+        {{error}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <!-- Campo Login-->
+    <div class="contenedor-input">
+        <label for="id_login"><b>Usuario:</b></label>
+        {{ form.login }}
+    </div>
+    <!--Mensajes de error para el campo de password-->
+    {% if form.password.errors %}
+    <div class="contenedor-mensaje">
+        {% for error in form.password.errors %}
+        <div><span>{{error}}</span></div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <!-- Campo password-->
+    <div class="contenedor-input">
+        <label for="id_login"><b>Contraseña:</b></label>
+        {{ form.password }}
+    </div>

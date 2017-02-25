@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin, PermissionDenied
 from .models import Articulo
 from .forms import ArticuloForm
 
@@ -31,10 +32,11 @@ class ListaArticulos(ListView):
         return context
 
 
-class VerArticulo(DetailView):
+class VerArticulo(LoginRequiredMixin, DetailView):
     model = Articulo
     template_name = 'articulos/ver_articulo.html'
     context_object_name = 'articulo'
+    login_url = reverse_lazy('account_login')
 
 
 class CrearArticulo(SuccessMessageMixin, CreateView):
@@ -48,6 +50,12 @@ class CrearArticulo(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('articulo:lista_articulos')
 
     success_message = u'El artículo %(titulo)s ha sido creado exitosamente.'
+
+    def get(self, request):
+        if request.user.has_perm('articulo.es_autor'):
+            return super(CrearArticulo, self).get(request)
+        else:
+            raise PermissionDenied
 
 
 class EditarArticulo(SuccessMessageMixin, UpdateView):

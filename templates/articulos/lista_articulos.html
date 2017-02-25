@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}Artículos{% endblock %}
+{% block head_title %}Artículos{% endblock %}
 
 {% block content %}
-{% include 'articulos/mensajes.html' %}
     {% if lista_articulos %}
     <section id="seccion-posts">
     {% for articulo in lista_articulos %}
@@ -13,7 +12,11 @@
         {% if articulo.imagen %}
         <img class="imagen-post" src="{{ articulo.imagen.url }}" alt="">
         {% endif %}
-        <p>{{articulo.contenido}}</p>
+        <p class="introduccion-articulo">{{articulo.introduccion}}</p>
+        <a href="{% url 'articulo:ver_articulo' articulo.id %}" class="leer-mas icon-book">Leer más>></a>
+        <!--<div class="contenedor-leer-mas">
+
+        </div>-->
     </article>
     {% endfor %}
     </section>

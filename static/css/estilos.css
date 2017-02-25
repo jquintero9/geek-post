@@ -9,25 +9,34 @@ todas las etiquetas.*/
 
 /* Estilos del body, html */
 body, html {
-	background-color: #F6FCF9;
+	background-color: #ECECEC;
 	font-size: 16px;
-	font-family: sans-serif, helvetica;
+	font-family:  'Dosis', sans-serif, helvetica;
 }
 
 /* Se remueve el subrayado de las etiquetas <a><a/>  
 y los puntos de las listas */
-a { text-decoration: none; }
-ul { list-style-type: none; }
+a { 
+	text-decoration: none;
+	transition-duration: 0.4s;
+}
 
+a::before,
+h1::before,
+h2::before,
+span::before { margin-right: 8px; }
+
+ul { list-style-type: none; }
 
 /* Estilos del Header */
 header#header {
-	position: fiexed;
+	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: 50;
 	height: 50px;
 	width: 100%;
-	background-color: #666;
+	background-color: #840728;
 }
 
 /* Estilos del contenedor header */
@@ -56,13 +65,14 @@ nav#menu-header {
 
 /* Estilos para la lista de opciones */
 nav#menu-header ul {
+	float: right;
 	overflow: hidden;
 	height: 50px;
 	text-align: left;
 }
 
 nav#menu-header li {
-	float: right;
+	float: left;
 	margin: 14px 10px;
 }
 
@@ -70,18 +80,24 @@ nav#menu-header li a{
 	display: block;
 	color: #FFF;
 	font-size: 1.1rem;
-	trasition-duration: 0.4s;
+}
+
+nav#menu-header li span {
+	font-size: 1.1rem;
+	color: #FFF;
 }
 
 nav#menu-header li a:hover {
-	color: #FCF6F9;
+	color: #DDD;
 }
 
 /* Estilos del contenido */
 div#contenido {
-	margin: 0 auto;
+	margin: 55px auto;
 	width: 80%;
 	padding: 10px;
+	box-shadow: 1px 1px 2px 5px #DDD;
+	background-color: #FFF;
 }
 
 /* Estilos para los mensajes */
@@ -114,15 +130,17 @@ section#seccion-posts {
 /* Estilos para los articles que contienen la
 información del post. */
 article.post {
-	margin: 10px auto;
+	position: relative;
+	margin: 1rem auto;
+	height: 256px;
 	box-shadow: 0 0 2px 2px #DDD;
 	border-radius: 5px;
 	padding: 8px;
 }
 
 article.post h2 { text-align: center; }
-article.post h2 a { color: #666; }
-article.post h2 a:hover { color: #333; }
+article.post h2 a { color: #555;  }
+article.post h2 a:hover { color: #E92424; }
 article.post small {
 	font-size: 0.8rem;
 	color: #999;
@@ -137,9 +155,53 @@ img.imagen-post {
 }
 
 article.post p { 
-	margin: 5px auto;
+	margin: 1rem auto;
 	text-align: justify;
 	font-size: 1.1rem;
+}
+
+p.introduccion-articulo {
+	font-style: italic;
+	color: #666;
+}
+
+/* Estilos del botón leer más */
+div.contenedor-leer-mas {
+	float: right;
+	margin: 0.2rem auto;
+	width: 10%;
+}
+
+a.leer-mas {
+	position: absolute;
+	bottom: 10px;
+	right: 1%;
+	padding: 8px;
+	background-color: #666;
+	border-radius: 8px;
+	color: #FFF;
+}
+
+a.leer-mas:hover { background-color: #333; }
+
+/* Estilos para el template ver_articulo.html */
+div.contenedor-articulo h1 {
+	text-align: center;
+	color: #333;
+}
+
+div.contenedor-articulo p {
+	margin: 1em auto;
+	font-size: 1.5rem;
+	text-align: justify;
+}
+
+div.contenedor-fechas {
+	margin: 1rem auto;
+	padding: 10px;
+	font-size: 0.8rem;
+	color: #777;
+	font-style: italic;
 }
 
 /* Estilos para los formularios */
@@ -158,26 +220,26 @@ div.contenedor-input {
 }
 
 /* Estilos para los elementos inputs */
-.input {
+.input, form.login input, form.signup input {
 	border: 1px solid #DDD;
-	height: 50px;
+	height: 40px;
 	width: 100%;
 	padding: 5px;
 	font-size: 1.1rem;
+	font-family: "Dosis";
 }
 
 /* Estilos para los input de tipo submit
 (botones del formulario) */
-input[type="submit"] {
-	background-color: #666;
+input[type="submit"], button {
+	background-color: rgba(132, 7, 40, 0.9);
 	color: #FFF;
 	padding: 10px;
 	cursor: pointer;
-	transition-duration: 0.4s;
 }
 
-input[type="submit"]:hover {
-	background-color: #444;
+input[type="submit"]:hover, button:hover {
+	background-color: rgba(132, 7, 40, 1);
 }
 
 textarea {
@@ -187,8 +249,143 @@ textarea {
     padding: 5px;
     font-size: 1.1rem;
     border: 1px solid #DDD;
+    font-family: 'Dosis';
 }
 
+/* Estilos para el formulario de login y registro*/
+
+div.contenedor-login {
+	margin: 64px auto;
+	width: 50%;
+	background-color: #FFF;
+	box-shadow: 0 0 2px 2px #DDD;
+	border-radius: 8px;
+}
+
+h2.titulo-login {
+	margin: 1rem auto;
+	padding: 10px;
+	text-align: center;
+	background-color: #840728;
+	color: #FFF;
+	border-radius: 8px 8px 0 0;
+	border-bottom: 1px solid #DDD;
+}
+
+ul.errorlist {
+	margin: 0.5rem auto;
+	width: 100%;
+	padding: 10px;
+	background-color: #FFF;
+	border: 1px solid orange;
+	border-radius: 8px;
+	color: orange;
+	text-align: justify;
+}
+
+div#mensaje-registro {
+	padding: 10px;
+}
+
+label {
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+.socialaccount_ballot {
+	margin: 0.5em auto;
+	padding: 5px;
+}
+
+.socialaccount_provider {
+	margin: 0.5em auto;
+	display: block;
+	width: 30%;
+	padding: 5px;
+	border-radius: 8px;
+	color: #FFF;
+	text-align: center;
+}
+
+.facebook { background-color: #3b5998; }
+.facebook:hover { background-color: rgba(59, 89, 152, 0.85); }
+
+.twitter { background-color: #1da1f2; }
+.twitter:hover { background-color: rgba(29, 161, 242, 0.8); }
+
+
+
+div#mensaje-registro p {
+	margin: 1em auto;
+	text-align: justify;
+}
+
+a#recuperar-password {
+	margin: 0.25rem auto;
+	display: block;
+	color: #888;
+}
+
+a#recuperar-password:hover {
+	color: #333;
+}
+
+p.parrafo {
+	padding: 5px;
+	margin: 0.5rem auto;
+	text-align: justify;
+}
+
+button { 
+	margin: 0 auto;
+	border-radius: 8px;
+	display: block;
+}
+
+/* Estilos para el template de logout */
+h1.titulo-logout {
+	text-align: center;
+	color: #555;
+}
+
+p.parrafo-logout {
+	font-size: 1.5rem;
+	margin: 1rem auto;
+	text-align: center;
+}
+
+
+/* Estilos para el template de error 403 (acceso denegado) */
+
+h1.titulo-403 {
+	text-align: center;
+	color: #555;
+}
+
+
+div.contenedor-error {
+	padding: 15px;
+}
+
+div.contenedor-error p {
+	margin: 0.5rem auto;
+	font-size: 1.5rem;
+	text-align: center;
+}
+
+a.boton-home {
+	display: block;
+	margin: 2rem auto;
+	width: 18%;
+	padding: 10px;
+	border-radius: 8px;
+	background-color: #840728;
+	color: #FFF;
+	text-align: center;
+	font-size: 1.5rem;
+}
+
+a.boton-home:hover { background-color: rgba(233, 36, 36, 0.8); }
 
 
 
