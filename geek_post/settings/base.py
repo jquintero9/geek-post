@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.twitter',
 ]
 
-'#Identificador del sitio web de est· aplicaciÛn'
+'#Identificador del sitio web de est√° aplicaci√≥n'
 
 SITE_ID = 1
 
@@ -145,13 +145,13 @@ url de la vista login.
 STATIC_URL = '/static/'
 
 """
-Url donde se almacenar·n los archivos estaticos (CSS, JS, IMGS)
+Url donde se almacenar√°n los archivos estaticos (CSS, JS, IMGS)
 """
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 """
-Url donde el servidor buscar· todo el contenido estatico de la
-aplicaciÛn.
+Url donde el servidor buscar√° todo el contenido estatico de la
+aplicaci√≥n.
 """
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -160,10 +160,10 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 """
-ConfiguaraciÛn de la aplicaciÛn django-allauth
+Configuaraci√≥n de la aplicaci√≥n django-allauth
 """
 
-'#Se especifica el sistema de autenticaciÛn que se va a utilizar.'
+'#Se especifica el sistema de autenticaci√≥n que se va a utilizar.'
 AUTHENTICATION_BACKENDS = (
 
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -174,7 +174,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 """
-Url a donde ser· redirigido el usuario una vez halla iniciado sesiÛn
+Url a donde ser√° redirigido el usuario una vez halla iniciado sesi√≥n
 desde alguna red social como facebook o twitter.
 """
 LOGIN_REDIRECT_URL = '/'
@@ -182,7 +182,7 @@ LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 
 """
-InformaciÛn que la aplicaciÛn solicitar· a facebok, cuando un
+Informaci√≥n que la aplicaci√≥n solicitar√° a facebok, cuando un
 usuario se este registrando.
 """
 SOCIALACCOUNT_PROVIDERS = {
@@ -193,14 +193,12 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 """
-ConfiguraciÛn para el envÌo de e-mails desde la aplicaciÛn hacia los
+Configuraci√≥n para el env√≠o de e-mails desde la aplicaci√≥n hacia los
 usuarios.
 """
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'psychologytestutp@gmail.com'
-EMAIL_HOST_PASSWORD = 'proyecto_labsoft'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
