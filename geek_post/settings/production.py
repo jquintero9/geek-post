@@ -31,4 +31,4 @@ ALLOWED_HOSTS = ['*']
 """
 Se especifica que la aplicación va almacenar los archivos estaticos mediante whitenoise.
 """
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFileStorage'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
