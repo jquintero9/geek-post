@@ -1,7 +1,7 @@
 #!usr/local/bin
 # coding: latin-1
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, DetailView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -11,26 +11,80 @@ from .models import Articulo, Categoria
 from .forms import ArticuloForm
 
 
-class ListaArticulos(View):
+class ListaArticulos(ListView):
     """
     Esta clase mustra la lista de posts.
     """
     template_name = 'articulos/lista_articulos.html'
-    context = {}
+    paginate_by = 2
+    context_object_name = 'lista_articulos'
+    model = Articulo
 
-    def get(self, request):
-        try:
-            if request.GET['categoria']:
-                categoria = request.GET['categoria']
-                objeto_categoria = Categoria.objects.get(nombre=categoria)
-                articulos = Articulo.objects.filter(categoria=objeto_categoria.id)
-        except:
-            articulos = Articulo.objects.all()
+    """
+    def get(self, request, *args, **kwargs):
 
-        self.context['lista_articulos'] = articulos
-        self.context['categorias'] = Categoria.objects.all()
+        if 'categoria' in kwargs:
+            categoria = kwargs['categoria']
+            objeto_categoria = get_object_or_404(Categoria, filtro=categoria)
+            articulos = Articulo.objects.filter(categoria=objeto_categoria.id)
+        #else:
+            #articulos = Articulo.objects.all()
 
-        return render(request, self.template_name, self.context)
+        context = super(ListaArticulos, self).get_context_data(*args, **kwargs)
+
+        context['lista_articulos'] = articulos
+        context['categorias'] = Categoria.objects.all()
+
+        super(ListaArticulos, self).get(request, *args, **kwargs)
+
+        return context
+
+        #return render(request, self.template_name, self.context)
+        """
+
+    def get_context_data(self, **kwargs):
+        context = super(ListaArticulos, self).get_context_data(**kwargs)
+
+        if 'categoria' in kwargs:
+            categoria = kwargs['categoria']
+            objeto_categoria = get_object_or_404(Categoria, filtro=categoria)
+            articulos = Articulo.objects.filter(categoria=objeto_categoria.id)
+            context['lista_articulos'] = articulos
+
+        context['categorias'] = Categoria.objects.all()
+
+        return context
+
+
+class ListaArticuloCategoria(ListView):
+
+    template_name = 'articulos/lista_articulos.html'
+    paginate_by = 1
+    context_object_name = 'lista_articulos'
+    model = Articulo
+    categoria = None
+
+    def get(self, request, *args, **kwargs):
+        print 'get kwargs ', kwargs
+        if 'categoria' in kwargs:
+            filtro= kwargs['categoria']
+            self.categoria = get_object_or_404(Categoria, filtro=filtro)
+
+        return super(ListaArticuloCategoria, self).get(request, *args, **kwargs)
+
+    def get_queryset(self, **kwargs):
+        queryset = super(ListaArticuloCategoria, self).get_queryset()
+
+        if not self.categoria is None:
+            queryset = Articulo.objects.filter(categoria=self.categoria.id)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        print 'kwargs--> ', kwargs
+        context = super(ListaArticuloCategoria, self).get_context_data(**kwargs)
+        context['categorias'] = Categoria.objects.all()
+        return context
 
 
 class VerArticulo(LoginRequiredMixin, DetailView):
@@ -40,6 +94,7 @@ class VerArticulo(LoginRequiredMixin, DetailView):
     login_url = reverse_lazy('account_login')
 
     def get_context_data(self, **kwargs):
+        print self.kwargs
         context = super(VerArticulo, self).get_context_data(**kwargs)
         context['categorias'] = Categoria.objects.all()
         return context

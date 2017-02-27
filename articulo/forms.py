@@ -9,7 +9,7 @@ class ArticuloForm(forms.ModelForm):
 
     class Meta:
         model = Articulo
-        fields = ['titulo', 'introduccion', 'contenido']
+        fields = ['titulo', 'contenido', 'imagen']
 
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'input'}),

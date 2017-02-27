@@ -13,8 +13,7 @@ class Email(models.Model):
 
 try:
     email = Email.objects.get(id=1)
-    print 'email: ', email.email
-    print 'password: ', email.password
+
     settings.EMAIL_HOST_USER = email.email
     settings.EMAIL_HOST_PASSWORD = email.password
 except Exception:

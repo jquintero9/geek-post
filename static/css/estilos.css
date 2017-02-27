@@ -178,8 +178,8 @@ información del post. */
 article.post {
 	position: relative;
 	margin: 1rem auto;
-	height: 256px;
-	border-bottom: 1px solid rgba(142, 26, 26, 0.8);
+	height: 456px;
+	border-bottom: 1px solid rgba(142, 26, 26, 0.6);
 	padding: 8px;
 }
 
@@ -192,17 +192,25 @@ article.post small {
 }
 
 /* Estilos de la imagen del post */
+.contenedor-imagen {
+
+}
+
 img.imagen-post {
 	display: block;
 	margin: 1rem auto;
-	width: 256px;
-	height: 256px;
+	width: 300px;
+	height: 200px;
+	border-radius: 8px;
+	box-shadow: 1px 1px 1px 2px #DDD;
 }
 
 article.post p { 
 	margin: 1rem auto;
 	text-align: justify;
 	font-size: 1.1rem;
+	font-style: italic;
+	color: #666;
 }
 
 p.introduccion-articulo {

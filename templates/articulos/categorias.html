@@ -4,7 +4,7 @@
 <section id="contenedor-categorias">
     {% for categoria in categorias %}
     <div class="categoria">
-        <a href="#">{{categoria}}</a>
+        <a href="{{ categoria.get_absolute_url|escape }}">{{categoria}}</a>
     </div>
     {% endfor %}
 </section>

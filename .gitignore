@@ -2,6 +2,7 @@
 geek_post.sqlite3
 geek_post/settings/local.py
 .idea/
+media/
 __pycache__/
 *.py[cod]
 *$py.class

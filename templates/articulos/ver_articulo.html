@@ -8,7 +8,7 @@
     {% if articulo.imagen %}
     <img class="imagen-post" src="{{ articulo.imagen.url }}" alt="">
     {% endif %}
-    <p>{{articulo.contenido}}</p>
+    <p>{{articulo.contenido|safe}}</p>
     <div class="contenedor-fechas">
         <div><b>Fecha de Publicación:</b> {{articulo.fecha_publicacion}}</div>
         <div><b>Última Actualización:</b> {{articulo.ultima_actualizacion}}</div>
