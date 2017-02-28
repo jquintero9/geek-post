@@ -20,14 +20,31 @@
         <a href="{{ articulo.get_absolute_url }}" class="leer-mas icon-book">Leer más>></a>
     </article>
     {% endfor %}
-        <ul class="paginacion">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{page_obj.previous_page_number}}">Anterior</a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{page_obj.next_page_number}}">Siguiente</a></li>
-            {% endif %}
-        </ul>
+        <nav class="paginacion">
+            <ul>
+                {% if page_obj.has_previous %}
+                <li><a href="?page={{page_obj.previous_page_number}}" class="boton prev">&lt;&lt;</a></li>
+                {% else %}
+                <li><a class="none boton prev">&lt;&lt;</a></li>
+                {% endif %}
+
+                {% if paginator.page_range %}
+                {% for i in paginator.page_range %}
+                {% if i == pagina_actual %}
+                <li><a href="?page={{i}}" class="boton numero actual">{{i}}</a></li>
+                {% else %}
+                <li><a href="?page={{i}}" class="boton numero">{{i}}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+
+                {% if page_obj.has_next %}
+                <li><a href="?page={{page_obj.next_page_number}}" class="boton next">&gt;&gt;</a></li>
+                {% else %}
+                <li><a class="none boton next">&gt;&gt;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
     </section>
     {% endif %}
     {% include 'articulos/categorias.html' %}

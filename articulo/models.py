@@ -47,11 +47,7 @@ class Articulo(models.Model):
         upload_to=upload_location,
         null=True,
         blank=True,
-        width_field='width_field',
-        height_field='height_field',
     )
-    width_field = models.PositiveSmallIntegerField(default=0),
-    height_field = models.PositiveSmallIntegerField(default=0),
     contenido = models.TextField()
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
     ultima_actualizacion = models.DateTimeField(auto_now=True)
@@ -98,15 +94,5 @@ class Articulo(models.Model):
     def __unicode__(self):
         return self.titulo
 
-"""
-def generar_slug(sender, instance, *args, **kwargs):
-    slug = slugify(instance.titulo)
-    print 'slug: ', slug
-    exists = Articulo.objects.filter(slug=slug).exists()
-    if exists:
-        slug = "%s-%s" % (slug, instance.id)
-
-    instance.slug = slug
-"""
 
 #post_save.connect(generar_slug, sender=Articulo)

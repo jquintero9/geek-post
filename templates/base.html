@@ -22,8 +22,12 @@
             </h1>
             <nav id="menu-header">
                 <ul>
+                    <li><a href="{% url 'articulo:lista_articulos' %}" class="icon-home">Home</a></li>
                     {% if user.is_authenticated %}
-                    <li><span class="icon-user">{{user}}</span></li>
+                    <li><a class="icon-user">{{user}}</a></li>
+                    {% if user.username == 'admin' %}
+                    <li><a class="icon-plus" href="{% url 'articulo:crear_articulo' %}">Post</a></li>
+                    {% endif %}
                     <li><a href="{% url 'account_logout' %}" class="icon-sign-out">Salir</a></li>
                     {% else %}
                     <li><a href="{% url 'account_login' %}" class="icon-sign-in">Entrar</a></li>

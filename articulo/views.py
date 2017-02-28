@@ -16,31 +16,18 @@ class ListaArticulos(ListView):
     Esta clase mustra la lista de posts.
     """
     template_name = 'articulos/lista_articulos.html'
-    paginate_by = 2
+    paginate_by = 3
+    pagina_actual = None
     context_object_name = 'lista_articulos'
     model = Articulo
 
-    """
     def get(self, request, *args, **kwargs):
+        if 'page' in request.GET:
+            self.pagina_actual = int(request.GET['page'])
+        else:
+            self.pagina_actual = 1
 
-        if 'categoria' in kwargs:
-            categoria = kwargs['categoria']
-            objeto_categoria = get_object_or_404(Categoria, filtro=categoria)
-            articulos = Articulo.objects.filter(categoria=objeto_categoria.id)
-        #else:
-            #articulos = Articulo.objects.all()
-
-        context = super(ListaArticulos, self).get_context_data(*args, **kwargs)
-
-        context['lista_articulos'] = articulos
-        context['categorias'] = Categoria.objects.all()
-
-        super(ListaArticulos, self).get(request, *args, **kwargs)
-
-        return context
-
-        #return render(request, self.template_name, self.context)
-        """
+        return super(ListaArticulos, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(ListaArticulos, self).get_context_data(**kwargs)
@@ -53,22 +40,30 @@ class ListaArticulos(ListView):
 
         context['categorias'] = Categoria.objects.all()
 
+        if not self.pagina_actual is None:
+            context['pagina_actual'] = self.pagina_actual
+
         return context
 
 
 class ListaArticuloCategoria(ListView):
 
     template_name = 'articulos/lista_articulos.html'
-    paginate_by = 1
+    paginate_by = 3
+    pagina_actual = None
     context_object_name = 'lista_articulos'
     model = Articulo
     categoria = None
 
     def get(self, request, *args, **kwargs):
-        print 'get kwargs ', kwargs
         if 'categoria' in kwargs:
             filtro= kwargs['categoria']
             self.categoria = get_object_or_404(Categoria, filtro=filtro)
+
+        if 'page' in request.GET:
+            self.pagina_actual = int(request.GET['page'])
+        else:
+            self.pagina_actual = 1
 
         return super(ListaArticuloCategoria, self).get(request, *args, **kwargs)
 
@@ -81,9 +76,12 @@ class ListaArticuloCategoria(ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        print 'kwargs--> ', kwargs
         context = super(ListaArticuloCategoria, self).get_context_data(**kwargs)
         context['categorias'] = Categoria.objects.all()
+
+        if not self.pagina_actual is None:
+            context['pagina_actual'] = self.pagina_actual
+
         return context
 
 

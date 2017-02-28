@@ -25,7 +25,9 @@ a::before,
 h1::before,
 h2::before,
 h3::before,
-span::before { margin-right: 8px; }
+span::before,
+label::before { margin-right: 8px;
+margin-top: 3px; }
 
 ul { list-style-type: none; }
 
@@ -37,7 +39,7 @@ header#header {
 	z-index: 50;
 	height: 64px;
 	width: 100%;
-	background-color: #FFF;
+	background-color: rgb(142, 26, 26);
 	border-bottom: 1px solid #DDD;
 }
 
@@ -83,7 +85,8 @@ nav#menu-header li {
 
 nav#menu-header li a{
 	display: block;
-	color: #8e1a1a;
+	/*color: #8e1a1a;*/
+	color: #FFF;
 	font-size: 1.1rem;
 }
 
@@ -93,7 +96,8 @@ nav#menu-header li span {
 }
 
 nav#menu-header li a:hover {
-	color: rgba(142, 26, 26, 0.7);
+	/*color: rgba(142, 26, 26, 0.7);*/
+	color: #db6a6a;
 }
 
 /* Estilos del contenido */
@@ -236,6 +240,63 @@ a.leer-mas {
 }
 
 a.leer-mas:hover { background-color: rgba(142, 26, 26, 0.7); }
+
+/* Estilos de la paginación */
+nav.paginacion {
+	margin: 1rem auto;
+	width: 100%;
+	overflow: hidden;
+}
+
+nav.paginacion ul {
+	margin: 0 auto;
+	overflow: hidden;
+	width: 90%;
+}
+
+
+nav.paginacion li {
+	float: left;
+}
+
+a.boton {
+	display: block;
+	
+	border-radius: 5px;
+	width: 28px;
+	height: 28px;
+	
+	font-weight: 700;
+	text-align: center;
+}
+
+a.prev, a.next {
+	background-color: rgb(142, 26, 26);
+	color: #FFF;
+	font-size: 1.2rem;
+}
+
+a.numero {
+	border: 1px solid #DDD;
+	color: rgb(142, 26, 26);
+	font-size: 1.3rem;
+}
+
+a.actual { 
+	background-color: rgb(142, 26, 26); 
+	color: #FFF;
+}
+
+a.none {
+	background-color: #DDD;
+}
+
+
+
+nav.paginacion ul li:not(last-child) {
+	margin-right: 5px;
+}
+
 
 /* Estilos para el template ver_articulo.html */
 div.contenedor-articulo h1 {
