@@ -13,7 +13,7 @@ de la aplicación y la base de datos del servidor (Heroku)
 """
 import dj_database_url
 
-"""#Se desactiva el modo debug de la aplicación, para que no muestre
+"""Se desactiva el modo debug de la aplicación, para que no muestre
 información detallada en caso de que ocurra un error."""
 DEBUG = False
 

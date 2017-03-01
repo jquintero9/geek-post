@@ -68,21 +68,22 @@ class Articulo(models.Model):
             try:
                 introduccion += self.contenido[i]
             except IndexError:
-                pass
+                break
         introduccion += " [...]"
 
         return introduccion
 
     def generar_slug(self):
-        original_slug = slugify(self.titulo)
-        exists = Articulo.objects.filter(slug=original_slug).exists()
+        if self.slug is None:
+            original_slug = slugify(self.titulo)
+            exists = Articulo.objects.filter(slug=original_slug).exists()
 
-        if exists:
-            new_slug = "%s-%d" % (original_slug, self.id)
-            self.slug = new_slug
-            return
+            if exists:
+                new_slug = "%s-%d" % (original_slug, self.id)
+                self.slug = new_slug
+                return
 
-        self.slug = original_slug
+            self.slug = original_slug
 
     def save(self):
         self.generar_slug()
