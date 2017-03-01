@@ -7,7 +7,7 @@
     <section id="seccion-posts">
     {% for articulo in lista_articulos %}
     <article class="post">
-        <h2><a href="{{ articulo.get_absolute_url }}">{{articulo.id}} - {{articulo.titulo}}</a><br />
+        <h2><a href="{{ articulo.get_absolute_url }}">{{articulo.titulo}}</a><br />
         <small>{{articulo.fecha_publicacion}}</small></h2>
         {% if articulo.imagen %}
         <div class="contenedor-imagen">
