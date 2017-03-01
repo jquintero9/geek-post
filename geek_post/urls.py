@@ -16,4 +16,4 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 else:
-    urlpatterns += serve(path=settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += serve(document_root=settings.MEDIA_ROOT)
