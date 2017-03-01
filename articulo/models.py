@@ -4,7 +4,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
@@ -73,27 +73,51 @@ class Articulo(models.Model):
 
         return introduccion
 
-    def generar_slug(self):
-        if self.slug is None:
-            original_slug = slugify(self.titulo)
-            exists = Articulo.objects.filter(slug=original_slug).exists()
-
-            if exists:
-                new_slug = "%s-%d" % (original_slug, self.id)
-                self.slug = new_slug
-                return
-
-            self.slug = original_slug
-
-    def save(self):
-        self.generar_slug()
-        super(Articulo, self).save()
-
     def get_absolute_url(self):
         return reverse('articulo:ver_articulo', kwargs={'slug': self.slug})
 
     def __unicode__(self):
         return self.titulo
 
+"""
+    def generar_slug(self):
 
-#post_save.connect(generar_slug, sender=Articulo)
+        original_slug = slugify(self.titulo)
+
+        exists = Articulo.objects.filter(slug=original_slug).exists()
+
+        if exists and (not original_slug == self.slug):
+            new_slug = "%s-%d" % (original_slug, self.id)
+            self.slug = new_slug
+            return
+
+        self.slug = original_slug
+"""
+"""
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.generar_slug()
+        update_fields['slug'] = self.slug
+        print update_fields
+        super(Articulo, self).save(update_fields=update_fields)
+"""
+
+
+
+
+def create_slug(instance, new_slug=None):
+    slug = slugify(instance.titulo)
+    if new_slug is not None:
+        slug = new_slug
+    qs = Articulo.objects.filter(slug=slug).order_by('-id')
+    exists = qs.exists()
+    if exists:
+        new_slug = "%s-%s" % (slug, qs.first().id)
+        return create_slug(instance, new_slug=new_slug)
+    return slug
+
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = create_slug(instance)
+
+pre_save.connect(pre_save_post_receiver, sender=Articulo)
