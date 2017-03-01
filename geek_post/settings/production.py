@@ -33,4 +33,3 @@ Se especifica que la aplicación va almacenar los archivos estaticos mediante whi
 """
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-print 'MEDIA_ROOT: In Production --> ', settings.MEDIA_ROOT
