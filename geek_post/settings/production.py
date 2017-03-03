@@ -33,3 +33,4 @@ Se especifica que la aplicación va almacenar los archivos estaticos mediante whi
 """
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+DROPBOX_ROOT_PATH = 'geek-post/production'

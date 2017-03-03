@@ -8,6 +8,7 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from storages.backends.dropbox import DropBoxStorage
 
 
 
@@ -44,7 +45,7 @@ class Articulo(models.Model):
     titulo = models.CharField(max_length=120)
     slug = models.SlugField(max_length=150, blank=True, unique=True)
     imagen = models.ImageField(
-        upload_to=upload_location,
+        storage=DropBoxStorage(),
         null=True,
         blank=True,
     )
