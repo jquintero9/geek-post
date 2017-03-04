@@ -31,6 +31,8 @@ try:
 
     settings.EMAIL_HOST_USER = email.email
     settings.EMAIL_HOST_PASSWORD = email.password
+    print 'email: ', settings.EMAIL_HOST_USER
+    print 'password: ', settings.EMAIL_HOST_PASSWORD,
 except Exception:
     pass
 
