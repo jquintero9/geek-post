@@ -31,8 +31,6 @@ try:
 
     settings.EMAIL_HOST_USER = email.email
     settings.EMAIL_HOST_PASSWORD = email.password
-    print 'email: ', settings.EMAIL_HOST_USER
-    print 'password: ', settings.EMAIL_HOST_PASSWORD,
 except Exception:
     pass
 
@@ -55,7 +53,6 @@ Esta llave es asignada a la configuración del proyecto.
 """
 try:
     key = KeyDropBox.objects.get(id=1)
-    print 'key dorpbox: ', key.key
     settings.DROPBOX_OAUTH2_TOKEN = key.key
 except:
     pass
