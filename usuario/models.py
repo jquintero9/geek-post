@@ -52,8 +52,9 @@ Se obtiene la llave secreta para acceder a la aplicación de Dropbox.
 Esta llave es asignada a la configuración del proyecto.
 """
 try:
-    key = KeyDropBox.objects.get(id=1)
-    settings.DROPBOX_OAUTH2_TOKEN = key.key
+    pass
+    #key = KeyDropBox.objects.get(id=1)
+    #settings.DROPBOX_OAUTH2_TOKEN = key.key
 except:
     pass
 

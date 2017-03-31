@@ -135,13 +135,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-"""
-Variables necesarias para acceder al almacenamiento de Dropbox.
-"""
-DROPBOX_OAUTH2_TOKEN = 'KDxx1ZptXnAAAAAAAAAACvtQ9lvh7bCV3Gm6YtgTcy7EQPim-wA_qX0Jw_nrV02m'
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 

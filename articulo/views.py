@@ -10,7 +10,6 @@ from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMix
 from .models import Articulo, Categoria
 from .forms import ArticuloForm
 
-
 class ListaArticulos(ListView):
     """
     Esta clase mustra la lista de posts.

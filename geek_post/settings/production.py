@@ -6,6 +6,7 @@ Se importa la configuración de la aplicacipón para obtener
 la instancia de la base de datos que está utilizando la aplicación.
 """
 from django.conf import settings
+import os
 
 """
 dj_database_url: Realiza una sincronización entre la base de datos
@@ -33,4 +34,9 @@ Se especifica que la aplicación va almacenar los archivos estaticos mediante whi
 """
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+"""
+Variables necesarias para acceder al almacenamiento de Dropbox.
+"""
+
+DROPBOX_OAUTH2_TOKEN = os.environ['DROPBOX_KEY']
 DROPBOX_ROOT_PATH = 'geek-post/production'
