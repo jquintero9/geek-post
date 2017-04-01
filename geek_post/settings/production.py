@@ -40,3 +40,9 @@ Variables necesarias para acceder al almacenamiento de Dropbox.
 
 DROPBOX_OAUTH2_TOKEN = os.environ['DROPBOX_KEY']
 DROPBOX_ROOT_PATH = 'geek-post/production'
+
+"""
+Email y password desde donde la aplicación enviará correos electronícos a los usuarios.
+"""
+EMAIL_HOST_USER = os.environ['EMAIL_APP']
+EMAIL_HOST_PASSWORD = os.environ['PASSWORD_EMAIL_APP']

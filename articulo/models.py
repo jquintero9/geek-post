@@ -80,31 +80,6 @@ class Articulo(models.Model):
     def __unicode__(self):
         return self.titulo
 
-"""
-    def generar_slug(self):
-
-        original_slug = slugify(self.titulo)
-
-        exists = Articulo.objects.filter(slug=original_slug).exists()
-
-        if exists and (not original_slug == self.slug):
-            new_slug = "%s-%d" % (original_slug, self.id)
-            self.slug = new_slug
-            return
-
-        self.slug = original_slug
-"""
-"""
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        self.generar_slug()
-        update_fields['slug'] = self.slug
-        print update_fields
-        super(Articulo, self).save(update_fields=update_fields)
-"""
-
-
-
 
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.titulo)
@@ -116,6 +91,7 @@ def create_slug(instance, new_slug=None):
         new_slug = "%s-%s" % (slug, qs.first().id)
         return create_slug(instance, new_slug=new_slug)
     return slug
+
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
