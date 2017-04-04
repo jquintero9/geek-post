@@ -9,6 +9,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin, PermissionDenied
 from .models import Articulo, Categoria
 from .forms import ArticuloForm
+from allauth.socialaccount.models import SocialAccount
+
+def confirm_email(request):
+    return render(request, 'confirm_email.html', {})
 
 class ListaArticulos(ListView):
     """
@@ -21,6 +25,15 @@ class ListaArticulos(ListView):
     model = Articulo
 
     def get(self, request, *args, **kwargs):
+        try:
+            user = SocialAccount.objects.get(user=request.user)
+            print vars(request.user)
+            print user.get_avatar_url()
+        except:
+            pass
+
+        #print request.user.get_avatar_url()
+
         if 'page' in request.GET:
             self.pagina_actual = int(request.GET['page'])
         else:

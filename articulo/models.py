@@ -11,7 +11,6 @@ from django.contrib.auth.models import User
 from storages.backends.dropbox import DropBoxStorage
 
 
-
 class Categoria(models.Model):
 
     """
@@ -33,8 +32,8 @@ class Categoria(models.Model):
         return reverse('articulo:categoria', kwargs={'categoria': self.filtro})
 
 
-def upload_location(instance, filename):
-    return "%s/%s" % (instance.id, filename)
+def get_dropbox_storage():
+    return DropBoxStorage()
 
 
 class Articulo(models.Model):
@@ -45,7 +44,7 @@ class Articulo(models.Model):
     titulo = models.CharField(max_length=120)
     slug = models.SlugField(max_length=150, blank=True, unique=True)
     imagen = models.ImageField(
-        storage=DropBoxStorage(),
+        storage=get_dropbox_storage(),
         null=True,
         blank=True,
     )
@@ -76,6 +75,9 @@ class Articulo(models.Model):
 
     def get_absolute_url(self):
         return reverse('articulo:ver_articulo', kwargs={'slug': self.slug})
+
+    def upload_location(self):
+        return "%s/%s" % (self.id)
 
     def __unicode__(self):
         return self.titulo

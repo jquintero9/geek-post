@@ -12,11 +12,10 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 """
 
 import os
+from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-print 'abspath--> ', os.path.abspath(__file__)
-print 'base dir --> ', os.path.dirname(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -28,7 +27,6 @@ SECRET_KEY = 'y&v@n#u@_)wfhvbfjzjlmjxs4*y1!rmiv=*xa^b4bj(9(%wr9b'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -153,8 +151,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 """
 Configuaración de la aplicación django-allauth
@@ -176,6 +172,17 @@ desde alguna red social como facebook o twitter.
 """
 LOGIN_REDIRECT_URL = '/'
 
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+#ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = reverse_lazy('articulo:lista_articulos')
+#ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
+#ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+#ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_CONFIRMATION_SIGNUP = True
+
+SOCIALACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_QUERY_EMAIL = True
 
 """
@@ -187,6 +194,15 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE': ['email'],
         'METHOD': 'oauth2'  # instead of 'oauth2'
     },
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
 }
 
 """
@@ -197,10 +213,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 25
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-
-
-
-
-
 

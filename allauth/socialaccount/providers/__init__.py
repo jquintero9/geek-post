@@ -46,3 +46,4 @@ class ProviderRegistry(object):
 
 
 registry = ProviderRegistry()
+
