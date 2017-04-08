@@ -9,6 +9,7 @@ from django.utils.text import slugify
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from storages.backends.dropbox import DropBoxStorage
+from ckeditor.fields import RichTextField
 
 
 class Categoria(models.Model):
@@ -48,7 +49,7 @@ class Articulo(models.Model):
         null=True,
         blank=True,
     )
-    contenido = models.TextField()
+    contenido = RichTextField()
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
     ultima_actualizacion = models.DateTimeField(auto_now=True)
     autor = models.ForeignKey(User, default=1)
@@ -75,9 +76,6 @@ class Articulo(models.Model):
 
     def get_absolute_url(self):
         return reverse('articulo:ver_articulo', kwargs={'slug': self.slug})
-
-    def upload_location(self):
-        return "%s/%s" % (self.id)
 
     def __unicode__(self):
         return self.titulo

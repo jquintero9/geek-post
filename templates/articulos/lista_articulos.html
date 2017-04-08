@@ -3,49 +3,77 @@
 {% block head_title %}Artículos{% endblock %}
 
 {% block content %}
-    {% if lista_articulos %}
-    <section id="seccion-posts">
-    {% for articulo in lista_articulos %}
-    <article class="post">
-        <h2><a href="{{ articulo.get_absolute_url }}">{{articulo.titulo}}</a><br />
-        <small>{{articulo.fecha_publicacion}}</small></h2>
+    <div class="col-md-8">
+        <h1 class="page-header">
+            Geek Post
+        </h1>
+        {% if lista_articulos %}
+        {% for articulo in lista_articulos %}
+        <h2>
+            <a href="{{ articulo.get_absolute_url }}">{{ articulo.titulo }}</a>
+        </h2>
+        <p class="lead">
+            Subido por <a href="#">{{articulo.autor}}</a>
+        </p>
+        <p><span class="glyphicon glyphicon-time"></span> {{ articulo.fecha_publicacion }}</p>
+        <hr>
         {% if articulo.imagen %}
-        <div class="contenedor-imagen">
-            <img class="imagen-post" src="{{ articulo.imagen.url }}" alt="">
-        </div>
+        <img class="img-responsive img-portada-articulo" src="{{ articulo.imagen.url }}" alt="artículo" />
         {% endif %}
+        <hr>
         {% autoescape off %}
-        <p class="introduccion-articulo">{{articulo.get_introduccion}}</p>
+        <p class="introduccion">{{ articulo.get_introduccion }}</p>
+        <a class="btn btn-primary boton-leer-mas" href="{{ articulo.get_absolute_url }}">Leer más <span class="glyphicon glyphicon-chevron-right"></span></a>
         {% endautoescape %}
-        <a href="{{ articulo.get_absolute_url }}" class="leer-mas icon-book">Leer más>></a>
-    </article>
-    {% endfor %}
-        <nav class="paginacion">
-            <ul>
+        <hr>
+        {% endfor %}
+        {% else %}
+        <div>La lista de artículos está vacía.</div>
+        {% endif %}
+        <nav aria-label="Page navigation">
+            <ul id="paginacion" class="pagination pagination-lg">
                 {% if page_obj.has_previous %}
-                <li><a href="?page={{page_obj.previous_page_number}}" class="boton prev">&lt;&lt;</a></li>
+                <li>
+                    <a href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
                 {% else %}
-                <li><a class="none boton prev">&lt;&lt;</a></li>
+                <li class="disabled">
+                    <span>
+                        <span aria-hidden="true">&laquo;</span>
+                    </span>
+                </li>
                 {% endif %}
 
                 {% if paginator.page_range %}
                 {% for i in paginator.page_range %}
                 {% if i == pagina_actual %}
-                <li><a href="?page={{i}}" class="boton numero actual">{{i}}</a></li>
+                <li class="active">
+                    <span>{{ i }}<span class="sr-only">(current)</span></span>
+                </li>
                 {% else %}
-                <li><a href="?page={{i}}" class="boton numero">{{i}}</a></li>
+                <li><a href="?page={{i}}">{{i}}</a></li>
                 {% endif %}
                 {% endfor %}
                 {% endif %}
 
                 {% if page_obj.has_next %}
-                <li><a href="?page={{page_obj.next_page_number}}" class="boton next">&gt;&gt;</a></li>
+                <li>
+                    <a href="?page={{page_obj.next_page_number}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
                 {% else %}
-                <li><a class="none boton next">&gt;&gt;</a></li>
+                <li class="disabled">
+                    <span>
+                        <span aria-hidden="true">&raquo;</span>
+                    </span>
+                </li>
                 {% endif %}
             </ul>
         </nav>
-    </section>
-    {% endif %}
+        <hr/>
+    </div>
     {% include 'articulos/categorias.html' %}
 {% endblock %}

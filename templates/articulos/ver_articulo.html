@@ -3,16 +3,54 @@
 {% block head_title %}{{articulo.titulo}}{% endblock %}
 
 {% block content %}
-<div class="contenedor-articulo">
-    <h1>{{articulo.titulo}}</h1>
+
+<!-- Blog Post Content Column -->
+<div class="col-lg-8">
+
+    <!-- Blog Post -->
+
+    <!-- Title -->
+    <h1>{{ articulo.titulo }}</h1>
+
+    <!-- Author -->
+    <p class="lead">
+        Autor <a href="#">{{ articulo.autor }}</a>
+    </p>
+
+    <hr>
+
+    <!-- Date/Time -->
+    <p><span class="glyphicon glyphicon-time"></span>{{ articulo.fecha_publicacion }}</p>
+
+    <hr>
+
+    <!-- Preview Image -->
     {% if articulo.imagen %}
-    <img class="imagen-post" src="{{ articulo.imagen.url }}" alt="">
+    <img class="img-responsive img-portada-articulo" src="{{ articulo.imagen.url }}" alt="">
     {% endif %}
-    <p>{{articulo.contenido|safe}}</p>
-    <div class="contenedor-fechas">
-        <div><b>Fecha de Publicación:</b> {{articulo.fecha_publicacion}}</div>
-        <div><b>Última Actualización:</b> {{articulo.ultima_actualizacion}}</div>
+    <hr>
+
+    <!-- Post Content -->
+    <article id="contenido-articulo">
+        {{ articulo.contenido | safe }}
+    </article>
+
+    <hr>
+
+    <!-- Blog Comments -->
+
+    <!-- Comments Form -->
+    <div class="well">
+        <h4>Comentar: </h4>
+        <form role="form">
+            <div class="form-group">
+                <textarea class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
     </div>
+
+    <hr>
 </div>
 {% include 'articulos/categorias.html' %}
 {% endblock %}

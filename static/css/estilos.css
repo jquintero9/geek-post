@@ -1,157 +1,69 @@
-/*Se definen estilos por defecto, para inicializar
-todas las etiquetas.*/
-* {
-	border: 0;
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    font-size: 16px;
+    font-family: "Dosis";
 }
 
-/* Estilos del body, html */
-body, html {
-	background-color: #ECECEC;
-	font-size: 16px;
-	font-family:  'Dosis', sans-serif, helvetica;
+footer {
+    margin: 48px 0;
 }
 
-/* Se remueve el subrayado de las etiquetas <a><a/>  
-y los puntos de las listas */
-a { 
-	text-decoration: none;
-	transition-duration: 0.4s;
-}
+ul { list-style: none; }
 
-a::before,
-h1::before,
-h2::before,
-h3::before,
-span::before,
-label::before { margin-right: 8px;
-margin-top: 3px; }
-
-ul { list-style-type: none; }
-
-/* Estilos del Header */
-header#header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 50;
-	height: 64px;
-	width: 100%;
-	/*background-color: rgb(142, 26, 26);*/
-	background-color: #555;
-	border-bottom: 1px solid #DDD;
-}
-
-/* Estilos del contenedor header */
-div#contenedor-header {
-	margin: 0 auto;
-	width: 80%;
-	overflow: hidden;
-}
-
-/* Estilos para el titulo header*/
-h1#titulo-header {
-	float: left;
-	margin: 0 auto;
-	width: 30%;
-	height: 64px;
-}
-
-h1#titulo-header img {
-	height: 90%
+/* Estilos del contenedor */
+div#contenedor {
+    position: relative;
 }
 
 
-/* Estilos para el menú header */
-nav#menu-header {
-	float: right;
-	width: 70%;
-	height: 50px;
+/* Estilos de la barra de navegación del header */
+.navbar-inverse {
+	background-color: rgb(142, 26, 26);
 }
 
-/* Estilos para la lista de opciones */
-nav#menu-header ul {
-	float: right;
-	overflow: hidden;
-	height: 50px;
-	text-align: left;
+img#logo {
+    margin: 0 auto;
+    height: 50px;
 }
 
-nav#menu-header li {
-	float: left;
-	margin: 21px 10px;
+a#brand-logo {
+    padding: 0;
 }
 
-nav#menu-header li a{
-	display: block;
-	/*color: #8e1a1a;*/
-	color: #FFF;
-	font-size: 1.1rem;
+ul#menu-header li a {
+    color: #FFF;
+    transition-duration: 0.4s;
 }
 
-nav#menu-header li span {
-	font-size: 1.1rem;
-	color: rgba(126, 26, 26, 1);
+ul#menu-header li a:hover {
+    color: #db6a6a;
 }
 
-nav#menu-header li a:hover {
-	/*color: rgba(142, 26, 26, 0.7);*/
-	color: #db6a6a;
+/* Estilos de las imagenes de la portada del artículo */
+img.img-portada-articulo {
+    width: 900px;
+    height: 300px;
 }
 
-/* Estilos del contenido */
-div#contenido {
-	margin: 68px auto;
-	overflow: hidden;
-	width: 80%;
-	padding: 10px;
-	box-shadow: 1px 1px 2px 5px #DDD;
-	background-color: #FFF;
+/* Estilos del contenido del artículo. */
+article#contenido-articulo p {
+    text-align: justify;
 }
 
-/* Estilos para los mensajes */
-div.contenedor-mensaje {
-	margin: 32px auto;
-	width: 80%;
-	padding: 10px;
-	background-color: #FCF6F9;
-	border-radius: 10px;
+/* Estilos de la introducción del artículo */
+p.introduccion {
+	text-align: justify;
+	font-style: italic;
+	color: #666;
 }
 
-/* Estilos par los mensajes de éxito */
-div.success {
-	border: 1px solid green;
-	color: green;
-}
+/* Estilos de la lista de categorías categorias.html */
 
-/* Estilos para los mensajes de error */
-div.error {
-	border: 1px solid red;
-	color: red;
-}
-
-/* Estilos para la lista de posts (lista_post.html) */
-section#seccion-posts,
-aside#categorias,
-div.contenedor-articulo { float: left; }
-
-section#seccion-posts,
-div.contenedor-articulo {
-	width: 59%;
-}
-
-aside#categorias {
-	margin-left: 1rem;
-	width: 39%;
-	padding: 10px;
-}
-
-h3.titulo-categorias {
+h3.titulo-panel {
 	padding: 10px;
 	border-radius: 8px 8px 0 0;
-	background-color: rgb(142, 26, 26);
+	background-color: #650303;
 	color: #FFF;
 	text-align: center;
 }
@@ -167,347 +79,116 @@ div.categoria {
 div.categoria a {
 	margin: 11px auto;
 	color: #db6a6a;
-	font-size: 1.4rem;
+	font-size: 1.1em;
 }
 
-div.categoria a::before { content: ">"; }
+div.categoria a::before { content: "> "; }
 
 div.categoria a:hover {
 	color: rgb(142, 26, 26);
 }
 
-
-
-/* Estilos para los articles que contienen la
-información del post. */
-article.post {
-	position: relative;
-	margin: 1rem auto;
-	height: 456px;
-	border-bottom: 1px solid rgba(142, 26, 26, 0.6);
-	padding: 8px;
-}
-
-article.post h2 { text-align: center; }
-article.post h2 a { color: #555;  }
-article.post h2 a:hover { color: #E92424; }
-article.post small {
-	font-size: 0.8rem;
-	color: #999;
-}
-
-/* Estilos de la imagen del post */
-.contenedor-imagen {
-
-}
-
-img.imagen-post {
-	display: block;
-	margin: 1rem auto;
-	width: 300px;
-	height: 200px;
-	border-radius: 8px;
-	box-shadow: 1px 1px 1px 2px #DDD;
-}
-
-article.post p { 
-	margin: 1rem auto;
-	text-align: justify;
-	font-size: 1.1rem;
-	font-style: italic;
-	color: #666;
-}
-
-p.introduccion-articulo {
-	font-style: italic;
-	color: #666;
-}
-
 /* Estilos del botón leer más */
-div.contenedor-leer-mas {
-	float: right;
-	margin: 0.2rem auto;
-	width: 10%;
+a.boton-leer-mas {
+    background-color: rgb(142, 26, 26);
 }
 
-a.leer-mas {
-	position: absolute;
-	bottom: 10px;
-	right: 1%;
-	padding: 8px;
-	background-color: #8e1a1a;
-	border-radius: 8px;
-	color: #FFF;
+a.boton-leer-mas:hover {
+    background-color: rgba(142, 26, 26, 0.9);
 }
-
-a.leer-mas:hover { background-color: rgba(142, 26, 26, 0.7); }
 
 /* Estilos de la paginación */
-nav.paginacion {
-	margin: 1rem auto;
-	width: 100%;
-	overflow: hidden;
+ul#paginacion li.active span {
+    background-color: rgb(142, 26, 26);
+    border-color: rgb(142, 26, 26);
 }
 
-nav.paginacion ul {
-	margin: 0 auto;
-	overflow: hidden;
-	width: 90%;
+ul#paginacion li a {
+    color: rgb(142, 26, 26);
 }
 
-
-nav.paginacion li {
-	float: left;
-}
-
-a.boton {
-	display: block;
-	
-	border-radius: 5px;
-	width: 28px;
-	height: 28px;
-	
-	font-weight: 700;
-	text-align: center;
-}
-
-a.prev, a.next {
-	background-color: rgb(142, 26, 26);
-	color: #FFF;
-	font-size: 1.2rem;
-}
-
-a.numero {
-	border: 1px solid #DDD;
-	color: rgb(142, 26, 26);
-	font-size: 1.3rem;
-}
-
-a.actual { 
-	background-color: rgb(142, 26, 26); 
-	color: #FFF;
-}
-
-a.none {
-	background-color: #DDD;
-}
-
-
-
-nav.paginacion ul li:not(last-child) {
-	margin-right: 5px;
-}
-
-
-/* Estilos para el template ver_articulo.html */
-div.contenedor-articulo h1 {
-	text-align: center;
-	color: #333;
-}
-
-div.contenedor-articulo p {
-	margin: 1em auto;
-	font-size: 1.5rem;
-	text-align: justify;
-}
-
-div.contenedor-fechas {
-	margin: 1rem auto;
-	padding: 10px;
-	font-size: 0.8rem;
-	color: #777;
-	font-style: italic;
+/* Estilos para centrar las columnas */
+.col-center{
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Estilos para los formularios */
-
-/* Contenedor del formulario */
-div.contenedor-formulario {
-	margin: 1rem auto;
-	width: 80%;
+div.form-wrapper {
+    margin: 128px auto;
+    padding-bottom: 10px;
+    box-shadow: 1px 1px 2px 2px #DDD;
+    max-width: 360px;
 }
 
-/* Contenedor de cada input */
+div#form-reset { max-width: 480px; }
+
+
+div.alert {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 1em auto;
+    max-width: 360px;
+}
+
+/* Estilos para los botones de autenticación con redes socilales */
+a.socialaccount_provider {
+    display: block;
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    font-size: 1.6em;
+    color: #FFF;
+    text-align: center;
+    text-decoration: none;
+    transition: all .4s;
+}
+
+a.socialaccount_provider span::before { margin-bottom: 5px; }
+
+a#facebook { background-color: #3b5998; }
+a#facebook:hover { background-color: rgba(59, 89, 152, 0.85); }
+
+a#twitter { background-color: #1da1f2; }
+a#twitter:hover { background-color: rgba(29, 161, 242, 0.8); }
+
+a#google { background-color: #dd4b39; }
+a#google:hover { background-color: rgba(221, 75, 57, 0.8); }
+
 div.contenedor-input {
-	margin: 0.8rem auto;
-	width: 60%;
-	padding: 10px;
+    margin: 0.5em auto;
+    width: 80%;
+    paddgin: 10px;
 }
 
-/* Estilos para los elementos inputs */
-.input, form.login input, form.signup input {
-	border-bottom: 2px solid rgba(142, 26, 26, 0.9);
-	height: 40px;
-	width: 100%;
-	padding: 5px;
-	outline: none;
-	font-size: 1.1rem;
-	font-family: "Dosis";
-}
-
-/* Estilos para los input de tipo submit
-(botones del formulario) */
-input[type="submit"], button {
-	display: block;
-	width: 100%;
-	background-color: rgba(142, 26, 26, 0.8);
-	color: #FFF;
-	padding: 10px;
-	cursor: pointer;
-}
-
-input[type="submit"]:hover, button:hover {
-	background-color: rgba(142, 26, 26, 1);
-}
-
-textarea {
-    resize: none;
+div.contenedor-input input {
     width: 100%;
-    height: 250px;
-    padding: 5px;
-    font-size: 1.1rem;
-    border: 1px solid #DDD;
-    font-family: 'Dosis';
+    padding: 10px;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid #8E1A1A;
+    transition: all 0.4s:
 }
 
-/* Estilos para el formulario de login y registro*/
+div.contenedor-input input:focus { border-bottom: 2px solid #650303; }
 
-div.contenedor-form {
-	margin: 32px auto;
-	width: 50%;
-	background-color: #FFF;
-	box-shadow: 0 0 2px 2px rgba(142, 26, 26, 0.5);
-	border-radius: 8px;
+button.submit-form {
+    width: 100%;
+    background-color: #8E1A1A;
+    border-color: #B23B3B;
+    transition: all 0.4s;
+ }
+
+button.submit-form:hover {
+    background-color: #650303;
+    border-color: #8E1A1A;
 }
 
-h2.titulo-login {
-	margin: 1rem auto;
-	padding: 10px;
-	text-align: center;
-	background-color: #8e1a1a;
-	color: #FFF;
-	border-radius: 8px 8px 0 0;
-	border-bottom: 1px solid #DDD;
+div.panel-informacion {
+    margin: 128px auto;
 }
 
-ul.errorlist {
-	margin: 0.5rem auto;
-	width: 100%;
-	padding: 10px;
-	background-color: #FFF;
-	border: 1px solid orange;
-	border-radius: 8px;
-	color: orange;
-	text-align: justify;
-}
-
-div#mensaje-registro {
-	padding: 10px;
-}
-
-label {
-	font-size: 1rem;
-	font-weight: bold;
-}
-
-.socialaccount_ballot {
-	margin: 0.5em auto;
-	padding: 5px;
-}
-
-.socialaccount_provider {
-	margin: 0.5em auto;
-	display: block;
-	width: 30%;
-	padding: 5px;
-	border-radius: 8px;
-	color: #FFF;
-	text-align: center;
-}
-
-.facebook { background-color: #3b5998; }
-.facebook:hover { background-color: rgba(59, 89, 152, 0.85); }
-
-.twitter { background-color: #1da1f2; }
-.twitter:hover { background-color: rgba(29, 161, 242, 0.8); }
-
-.google { background-color: #dd4b39; }
-.google:hover { background-color: rgba(221, 75, 57, 0.8); }
-
-
-div#mensaje-registro p {
-	margin: 1em auto;
-	text-align: justify;
-}
-
-a#recuperar-password {
-	margin: 0.25rem auto;
-	display: block;
-	color: #888;
-}
-
-a#recuperar-password:hover {
-	color: #333;
-}
-
-p.parrafo {
-	padding: 5px;
-	margin: 0.5rem auto;
-	text-align: justify;
-}
-
-button { 
-	margin: 0 auto;
-	border-radius: 8px;
-	display: block;
-}
-
-/* Estilos para el template de logout */
-h1.titulo-logout {
-	text-align: center;
-	color: #555;
-}
-
-p.parrafo-logout {
-	font-size: 1.5rem;
-	margin: 1rem auto;
-	text-align: center;
-}
-
-
-/* Estilos para el template de error 403 (acceso denegado) */
-
-h1.titulo-403 {
-	text-align: center;
-	color: #555;
-}
-
-
-div.contenedor-error {
-	padding: 15px;
-}
-
-div.contenedor-error p {
-	margin: 0.5rem auto;
-	font-size: 1.5rem;
-	text-align: center;
-}
-
-a.boton-home {
-	display: block;
-	margin: 2rem auto;
-	width: 18%;
-	padding: 10px;
-	border-radius: 8px;
-	background-color: #840728;
-	color: #FFF;
-	text-align: center;
-	font-size: 1.5rem;
-}
-
-a.boton-home:hover { background-color: rgba(233, 36, 36, 0.8); }
-
-
-
-
-
+h2.titulo-informacion { color: #3E0000; }

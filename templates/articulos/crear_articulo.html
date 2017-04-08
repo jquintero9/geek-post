@@ -7,7 +7,8 @@
 <div class="contenedor-formulario">
 	<h2 class="titulo-formulario">Crear Artículo</h2>
     <form action="" method="post" enctype="multipart/form-data"> {% csrf_token %}
-        {% include 'articulos/form_articulo.html' %}
+        {{form.media}}
+        {{form.as_p}}
         <div class="contenedor-input">
             <input class="input" type="submit" value="Crear" />
         </div>
@@ -15,37 +16,5 @@
 </div>
 {% endblock %}
 
-{% if form.errors %}
-    <div class="contenedor-mensaje">
-        {% for error in form.errors_list %}
-        {{error}}
-        {% endfor %}
-    </div>
 
-    {% endif %}
-    <!--Mensajes de error para el campo de login-->
-    {% if form.login.errors %}
-    <div class="contenedor-mensaje">
-        {% for error in form.login.errors %}
-        {{error}}
-    </div>
-    {% endfor %}
-    {% endif %}
-    <!-- Campo Login-->
-    <div class="contenedor-input">
-        <label for="id_login"><b>Usuario:</b></label>
-        {{ form.login }}
-    </div>
-    <!--Mensajes de error para el campo de password-->
-    {% if form.password.errors %}
-    <div class="contenedor-mensaje">
-        {% for error in form.password.errors %}
-        <div><span>{{error}}</span></div>
-    </div>
-    {% endfor %}
-    {% endif %}
-    <!-- Campo password-->
-    <div class="contenedor-input">
-        <label for="id_login"><b>Contraseña:</b></label>
-        {{ form.password }}
-    </div>
+

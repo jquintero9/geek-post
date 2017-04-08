@@ -2,11 +2,14 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+{% block head_title %}Verifica tu correo electrónico{% endblock %}
 
 {% block content %}
-    <h1>{% trans "Verify Your E-mail Address" %}</h1>
+<div class="col-xs-11 col-sm-10 col-md-10 col-center panel-informacion">
+    <h2 class="titulo-informacion">Verifica tu dirección de correo electrónico.</h2>
 
-    <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
+    <p class="lead">Te hemos enviado un correo de verificación. Haz click en link para completar tu registro. Si no has recibido el correo, por favor comunicate con nostros.</p>
+</div>
+
 
 {% endblock %}

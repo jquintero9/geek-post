@@ -88,8 +88,8 @@ class LoginView(RedirectAuthenticatedUserMixin,
                 AjaxCapableProcessFormViewMixin,
                 FormView):
     form_class = LoginForm
-    template_name = "account/login." + app_settings.TEMPLATE_EXTENSION
-    #template_name = "accounts/login.html"
+    #template_name = "account/login." + app_settings.TEMPLATE_EXTENSION
+    template_name = "accounts/login.html"
     success_url = None
     redirect_field_name = "next"
 
@@ -168,7 +168,8 @@ class CloseableSignupMixin(object):
 
 class SignupView(RedirectAuthenticatedUserMixin, CloseableSignupMixin,
                  AjaxCapableProcessFormViewMixin, FormView):
-    template_name = "account/signup." + app_settings.TEMPLATE_EXTENSION
+    #template_name = "account/signup." + app_settings.TEMPLATE_EXTENSION
+    template_name = "accounts/signup.html"
     form_class = SignupForm
     redirect_field_name = "next"
     success_url = None
