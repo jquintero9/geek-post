@@ -52,15 +52,12 @@ class Articulo(models.Model):
     contenido = RichTextField()
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
     ultima_actualizacion = models.DateTimeField(auto_now=True)
-    autor = models.ForeignKey(User, default=1)
+    autor = models.ForeignKey(User)
     categoria = models.ForeignKey('Categoria', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'articulos'
         ordering = ['-fecha_publicacion']
-        permissions = [
-            ('es_autor', 'es autor'),
-        ]
 
     def get_introduccion(self):
         n = 200

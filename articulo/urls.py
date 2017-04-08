@@ -6,7 +6,6 @@ from .views import (
     VerArticulo,
     EditarArticulo,
     EliminarArticulo,
-    confirm_email,
 )
 
 urlpatterns = [
@@ -16,5 +15,4 @@ urlpatterns = [
     url(r'^articulo/(?P<slug>[a-z0-9\-]+)$', VerArticulo.as_view(), name='ver_articulo'),
     url(r'^articulo/(?P<pk>\d+)/editar$', EditarArticulo.as_view(), name='editar_articulo'),
     url(r'^articulo/(?P<pk>\d+)/eliminar$', EliminarArticulo.as_view(), name='eliminar_articulo'),
-    url(r'^articulo/confirmar_email$', confirm_email, name='confirmar_email'),
 ]

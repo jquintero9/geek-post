@@ -32,13 +32,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul id="menu-header" class="nav navbar-nav navbar-right">
+                    <li><a class="icon-plus" href="{% url 'articulo:crear_articulo' %}">Crear Post</a></li>
                     {% if user.is_authenticated %}
                     <li>
                         <a><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user}}</a>
                     </li>
-                    {% if user.username == 'admin' %}
-                    <li><a class="icon-plus" href="{% url 'articulo:crear_articulo' %}">Post</a></li>
-                    {% endif %}
                     <li><a href="{% url 'account_logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Salir</a></li>
                     {% else %}
                     <li><a href="{% url 'account_login' %}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Entrar</a></li>

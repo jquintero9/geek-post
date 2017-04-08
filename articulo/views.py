@@ -3,7 +3,8 @@
 
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView
+from django.views import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin, PermissionDenied
@@ -11,8 +12,6 @@ from .models import Articulo, Categoria
 from .forms import ArticuloForm
 from allauth.socialaccount.models import SocialAccount
 
-def confirm_email(request):
-    return render(request, 'confirm_email.html', {})
 
 class ListaArticulos(ListView):
     """
@@ -110,7 +109,7 @@ class VerArticulo(LoginRequiredMixin, DetailView):
         return context
 
 
-class CrearArticulo(SuccessMessageMixin, CreateView):
+class CrearArticulo(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """
     Esta clase crea un nuevo post.
     """
@@ -119,14 +118,14 @@ class CrearArticulo(SuccessMessageMixin, CreateView):
     form_class = ArticuloForm
     template_name = 'articulos/crear_articulo.html'
     success_url = reverse_lazy('articulo:lista_articulos')
-
+    login_url = reverse_lazy('account_login')
     success_message = u'El artículo %(titulo)s ha sido creado exitosamente.'
 
-    def get(self, request):
-        if request.user.has_perm('articulo.es_autor'):
-            return super(CrearArticulo, self).get(request)
-        else:
-            raise PermissionDenied
+    def post(self, request, *args, **kwargs):
+        id = str(request.user.id)
+        request.POST['autor'] = id
+
+        return super(CrearArticulo, self).post(request, *args, **kwargs)
 
 
 class EditarArticulo(SuccessMessageMixin, UpdateView):
