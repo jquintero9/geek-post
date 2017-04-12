@@ -2,7 +2,7 @@
 # coding: latin-1
 
 from django import forms
-from .models import Articulo
+from .models import Articulo, Comentario
 
 
 class ArticuloForm(forms.ModelForm):
@@ -15,3 +15,10 @@ class ArticuloForm(forms.ModelForm):
             'titulo': forms.TextInput(attrs={'class': 'input'}),
             'contenido': forms.Textarea()
         }
+
+
+class ComentarioForm(forms.ModelForm):
+
+    class Meta:
+        model = Comentario
+        fields = '__all__'

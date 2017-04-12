@@ -6,6 +6,7 @@ from .views import (
     VerArticulo,
     EditarArticulo,
     EliminarArticulo,
+    comentar,
 )
 
 urlpatterns = [
@@ -13,6 +14,7 @@ urlpatterns = [
     url(r'^categoria/(?P<categoria>[a-z]+)$', ListaArticuloCategoria.as_view(), name='categoria'),
     url(r'^articulo/crear$', CrearArticulo.as_view(), name='crear_articulo'),
     url(r'^articulo/(?P<slug>[a-z0-9\-]+)$', VerArticulo.as_view(), name='ver_articulo'),
+    url(r'^articulo/procesar_comentario$', comentar),
     url(r'^articulo/(?P<pk>\d+)/editar$', EditarArticulo.as_view(), name='editar_articulo'),
     url(r'^articulo/(?P<pk>\d+)/eliminar$', EliminarArticulo.as_view(), name='eliminar_articulo'),
 ]

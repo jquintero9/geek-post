@@ -2,15 +2,17 @@
 # coding: latin-1
 
 from django.shortcuts import render, get_object_or_404
-from django.core.urlresolvers import reverse_lazy
+from django.http import HttpResponse
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
-from django.views import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin, PermissionDenied
-from .models import Articulo, Categoria
-from .forms import ArticuloForm
+from .models import Articulo, Categoria, Comentario
+from .forms import ArticuloForm, ComentarioForm
 from allauth.socialaccount.models import SocialAccount
+from .utils import encode, convertir_datos_comentarios
+import json
 
 
 class ListaArticulos(ListView):
@@ -101,11 +103,21 @@ class VerArticulo(LoginRequiredMixin, DetailView):
     template_name = 'articulos/ver_articulo.html'
     context_object_name = 'articulo'
     login_url = reverse_lazy('account_login')
+    usuario = None
+
+    def get(self, request, *args, **kwargs):
+        self.usuario = str(request.user.id)
+        return super(VerArticulo, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        print self.kwargs
         context = super(VerArticulo, self).get_context_data(**kwargs)
         context['categorias'] = Categoria.objects.all()
+        context['user_id'] = encode(self.usuario)
+        articulo = kwargs['object']
+
+        comentarios = Comentario.objects.filter(articulo=articulo)
+        context['comentarios'] = comentarios
+
         return context
 
 
@@ -144,3 +156,25 @@ class EliminarArticulo(DeleteView):
     template_name = 'articulos/eliminar_articulo.html'
     success_url = reverse_lazy('articulos:lista_articulos')
 
+
+class CrearComentario(CreateView):
+    model = Comentario
+    template_name = 'articulos/crear_comentario.html'
+    form_class = ComentarioForm
+    success_url = ''
+
+
+def comentar(request):
+
+    if request.method == 'POST':
+        data_form = convertir_datos_comentarios(request.body)
+
+        print data_form
+
+        form = ComentarioForm(data=data_form)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponse('El comentario se ha guardado.')
+        else:
+            return HttpResponse('Error al guardar el comentario.')

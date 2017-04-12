@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from storages.backends.dropbox import DropBoxStorage
 from ckeditor.fields import RichTextField
+from .utils import encode
 
 
 class Categoria(models.Model):
@@ -74,6 +75,10 @@ class Articulo(models.Model):
     def get_absolute_url(self):
         return reverse('articulo:ver_articulo', kwargs={'slug': self.slug})
 
+    def get_id(self):
+        return encode(str(self.id))
+
+
     def __unicode__(self):
         return self.titulo
 
@@ -95,3 +100,18 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
         instance.slug = create_slug(instance)
 
 pre_save.connect(pre_save_post_receiver, sender=Articulo)
+
+
+class Comentario(models.Model):
+    usuario = models.ForeignKey(User)
+    articulo = models.ForeignKey('Articulo', on_delete=models.CASCADE)
+    comentario = models.CharField(max_length=240)
+    fecha = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'comentarios'
+        verbose_name = 'comentario'
+        verbose_name_plural = 'comentarios'
+
+    def __unicode__(self):
+        return '%s - %s - %s' % (self.usuario, self.articulo, self.comentario)

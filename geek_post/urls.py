@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^', include('articulo.urls', namespace='articulo')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^usuario/', include('usuario.urls', namespace='usuario')),
 ]
 
 

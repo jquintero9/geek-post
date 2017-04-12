@@ -8,5 +8,5 @@ regex = {
 
 error_messages = {
     'texto': 'Ingrese solo letras.',
-    'genero': 'Género no válido.',
+    'genero': u'Género no válido.',
 }
